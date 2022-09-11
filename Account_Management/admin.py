@@ -3,3 +3,7 @@ from .models import UserProfile
 
 
 admin.site.register(UserProfile)
+
+
+# admin username = user 
+# admin password = user123
