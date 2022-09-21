@@ -7,6 +7,7 @@
     <h5>Name: {{ user.first_name }} {{ user.last_name }}</h5>
     <h5>Username: {{ user.username }}</h5>
     <h5>Email: {{ user.email }}</h5>
+    <a href="{% url 'Account_Management_App:edit_profile' %}" class="btn btn-warning">Edit Profile</a>
 </div>
 
 {% endblock main_content %}
