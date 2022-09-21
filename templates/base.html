@@ -29,6 +29,9 @@
               </li>
               {% if user.is_authenticated %}
                 <li class="nav-item">
+                  <a class="nav-link" href="{% url 'Account_Management_App:user_profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'Account_Management_App:signout' %}">SignOut</a>
                 </li>
               {% else %}
