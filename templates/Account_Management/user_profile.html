@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title_block %} Profile {% endblock title_block %}
+{% block main_content %}
+
+<div class="mt-2">
+    <h2>Your Profile</h2>
+    <h5>Name: {{ user.first_name }} {{ user.last_name }}</h5>
+    <h5>Username: {{ user.username }}</h5>
+    <h5>Email: {{ user.email }}</h5>
+</div>
+
+{% endblock main_content %}
+    
