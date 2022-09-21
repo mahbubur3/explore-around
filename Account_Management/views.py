@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import SignupForm
+from .forms import SignupForm, EditUserProfileForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import HttpResponseRedirect
@@ -53,3 +53,21 @@ def signout(request):
 @login_required
 def user_profile(request):
     return render(request, 'Account_Management/user_profile.html')
+
+
+# change user information
+@login_required
+def edit_user_profile(request):
+    current_user = request.user
+
+    form = EditUserProfileForm(instance=current_user)
+
+    if request.method == 'POST':
+        form = EditUserProfileForm(request.POST, instance=current_user)
+
+        if form.is_valid():
+            form.save()
+
+            form = EditUserProfileForm(instance=current_user)
+
+    return render(request, 'Account_Management/edit_user_profile.html', {'form': form})
