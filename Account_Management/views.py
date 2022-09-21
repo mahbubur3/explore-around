@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .forms import SignupForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
@@ -39,3 +40,10 @@ def signin(request):
                 return HttpResponseRedirect(reverse('index'))
 
     return render(request, 'Account_Management/signin.html', {'form': form})
+
+
+# account signout or logout system 
+@login_required
+def signout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
