@@ -47,3 +47,9 @@ def signin(request):
 def signout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+# show user profile
+@login_required
+def user_profile(request):
+    return render(request, 'Account_Management/user_profile.html')
