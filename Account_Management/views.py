@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from .forms import SignupForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
+from django.shortcuts import HttpResponseRedirect
+from django.urls import reverse
 
 
 def signup(request):
@@ -15,3 +19,23 @@ def signup(request):
             registered = True
 
     return render(request, 'Account_Management/signup.html', {'form': form, 'registered': registered})
+
+
+# account signin or login system 
+def signin(request):
+    form = AuthenticationForm()
+
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+
+    return render(request, 'Account_Management/signin.html', {'form': form})
