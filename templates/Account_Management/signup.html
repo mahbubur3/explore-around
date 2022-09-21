@@ -6,7 +6,7 @@
 {% if registered %}
     <div class="row justify-content-center">
         <div class="col-lg-6">
-            <div class="alert alert-success">Account created successfully. Please <a href="#">SignIn</a>
+            <div class="alert alert-success">Account created successfully. Please <a href="{% url 'Account_Management_App:signin' %}">SignIn</a>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
