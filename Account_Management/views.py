@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from .forms import SignupForm
 
 
 def signup(request):
-    form = UserCreationForm()
+    form = SignupForm()
     registered = False
 
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = SignupForm(data=request.POST)
 
         if form.is_valid():
             form.save()
