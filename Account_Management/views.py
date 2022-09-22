@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import SignupForm, EditUserProfileForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
@@ -71,3 +71,23 @@ def edit_user_profile(request):
             form = EditUserProfileForm(instance=current_user)
 
     return render(request, 'Account_Management/edit_user_profile.html', {'form': form})
+
+
+# change user login password
+@login_required
+def change_password(request):
+    current_user = request.user
+
+    changed = False
+
+    form = PasswordChangeForm(current_user)
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(current_user, data=request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            changed = True
+
+    return render(request, 'Account_Management/change_password.html', {'form': form, 'changed': changed})
