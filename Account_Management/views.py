@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import SignupForm, EditUserProfileForm
+from .forms import SignupForm, EditUserProfileForm, ProfilePictureForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import HttpResponseRedirect
@@ -91,3 +91,20 @@ def change_password(request):
             changed = True
 
     return render(request, 'Account_Management/change_password.html', {'form': form, 'changed': changed})
+
+
+# add user profile picture 
+@login_required
+def add_profile_picture(request):
+    form = ProfilePictureForm()
+
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            user_obj = form.save(commit=False)
+            user_obj.user = request.user
+            user_obj.save()
+            return HttpResponseRedirect(reverse('Account_Management_App:user_profile'))
+
+    return render(request, 'Account_Management/add_profile_picture.html', {'form': form})

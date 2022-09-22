@@ -11,7 +11,7 @@
         {% else %}
             <img src="/media/profile_pics/demo.png" alt="avater" class="rounded-circle" width="100px">
             <div class="mt-2">
-                <a href="#">Add profile picture</a>
+                <a href="{% url 'Account_Management_App:add_profile_picture' %}" class="text-decoration-none">Add profile picture</a>
             </div>
         {% endif %}
     </div>
