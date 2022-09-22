@@ -20,7 +20,7 @@ class EditUserProfileForm(UserChangeForm):
         fields = ('first_name', 'last_name', 'username', 'email', 'password')
 
     
-class ProfilePicture(forms.ModelForm):
+class ProfilePictureForm(forms.ModelForm):
      class Meta:
         model = UserProfile
         fields = ['profile_picture', ]
