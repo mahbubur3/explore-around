@@ -12,20 +12,21 @@
     <header>
       <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
         <div class="container">
+          <a class="navbar-brand" href="{% url 'index' %}"><img src="/media/logo.png" width='60px' alt="Logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
-              </li>
               {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'Account_Management_App:user_profile' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'Account_Management_App:signout' %}">SignOut</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @{{ user.username }}
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'Account_Management_App:user_profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Account_Management_App:signout' %}">Logout</a></li>
+                  </ul>
                 </li>
               {% else %}
                 <li class="nav-item">
