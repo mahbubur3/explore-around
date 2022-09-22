@@ -108,3 +108,18 @@ def add_profile_picture(request):
             return HttpResponseRedirect(reverse('Account_Management_App:user_profile'))
 
     return render(request, 'Account_Management/add_profile_picture.html', {'form': form})
+
+
+# change user profile picture 
+@login_required
+def change_profile_picture(request):
+    form = ProfilePictureForm(instance=request.user.user_profile)
+
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=request.user.user_profile)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('Account_Management_App:user_profile'))
+
+    return render(request, 'Account_Management/add_profile_picture.html', {'form': form})
