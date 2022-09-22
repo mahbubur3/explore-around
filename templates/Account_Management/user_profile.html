@@ -4,6 +4,14 @@
 
 <div class="mt-2">
     <h2>Your Profile</h2>
+    <hr>
+    <div class="mb-2">
+        {% if user.user_profile %}
+            <img src="/media/{{ user.user_profile.profile_picture }}" alt="Profile picture" class="rounded-circle" width="100px">
+        {% else %}
+            <img src="/media/profile_pics/demo.png" alt="avater" class="rounded-circle" width="100px">
+        {% endif %}
+    </div>
     <h5>Name: {{ user.first_name }} {{ user.last_name }}</h5>
     <h5>Username: {{ user.username }}</h5>
     <h5>Email: {{ user.email }}</h5>
@@ -11,4 +19,3 @@
 </div>
 
 {% endblock main_content %}
-    
