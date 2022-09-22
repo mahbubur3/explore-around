@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Account_Management',
     'Blog_Management',
     'crispy_forms',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 
