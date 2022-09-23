@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog
 import uuid
@@ -7,7 +7,7 @@ from django.urls import reverse
 
 
 def blogs(request):
-    return render(request, 'Blog_Management/blogs.html')
+    return render(request, 'Blog_Management/all_blog.html')
 
 
 # write blog or create blog 
@@ -26,3 +26,9 @@ class WriteBlog(LoginRequiredMixin, CreateView):
         blog_obj.save()
         return HttpResponseRedirect(reverse('index'))
 
+
+# all blog
+class AllBlog(ListView):
+    context_object_name = 'blogs'
+    model = Blog
+    template_name = 'Blog_Management/all_blog.html'

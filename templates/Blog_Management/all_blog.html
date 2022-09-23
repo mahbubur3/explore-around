@@ -2,6 +2,9 @@
 {% block title_block %} Home {% endblock title_block %}
 {% block main_content %}
 
-<h2>I am in the homepage</h2>
+{% for blog in blogs %}
+    <h4>{{ blog.blog_title }}</h4>
+    <h6>{{ blog.publish_date }}</h6>
+{% endfor %}
 
 {% endblock main_content %}
