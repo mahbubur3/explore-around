@@ -32,3 +32,10 @@ class AllBlog(ListView):
     context_object_name = 'blogs'
     model = Blog
     template_name = 'Blog_Management/all_blog.html'
+
+
+# show full blog 
+def full_blog(request, slug):
+    blog = Blog.objects.get(slug=slug)
+
+    return render(request, 'Blog_Management/full_blog.html', {'blog': blog})
