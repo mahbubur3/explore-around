@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog
 import uuid
 from django.urls import reverse
+from .forms import CommentForm
 
 
 def blogs(request):
@@ -37,5 +38,16 @@ class AllBlog(ListView):
 # show full blog 
 def full_blog(request, slug):
     blog = Blog.objects.get(slug=slug)
+    comment_form = CommentForm()
 
-    return render(request, 'Blog_Management/full_blog.html', {'blog': blog})
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.blog = blog
+            comment.save()
+            return HttpResponseRedirect(reverse('Blog_Management_App:full_blog', kwargs={'slug':slug}))
+
+    return render(request, 'Blog_Management/full_blog.html', {'blog': blog, 'comment_form': comment_form})
