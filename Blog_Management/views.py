@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog, Like
 import uuid
@@ -85,3 +85,8 @@ def unliked(request, pk):
     already_liked.delete()
 
     return HttpResponseRedirect(reverse('Blog_Management_App:full_blog', kwargs={'slug':blog.slug}))
+
+
+# user blog or my blog
+class MyBlogs(LoginRequiredMixin, TemplateView):
+    template_name = 'Blog_Management/my_blogs.html'
