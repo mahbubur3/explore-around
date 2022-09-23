@@ -11,4 +11,5 @@ urlpatterns = [
     path('liked/<pk>', views.liked, name='liked_post'),
     path('unliked/<pk>', views.unliked, name='unliked_post'),
     path('my-blogs/', views.MyBlogs.as_view(), name='my_blogs'),
+    path('edit/<pk>/', views.EditBlog.as_view(), name='edit_blog'),
 ]

@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import CreateView, ListView, TemplateView
+from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog, Like
 import uuid
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 
@@ -90,3 +90,13 @@ def unliked(request, pk):
 # user blog or my blog
 class MyBlogs(LoginRequiredMixin, TemplateView):
     template_name = 'Blog_Management/my_blogs.html'
+
+
+# edit user blog
+class EditBlog(LoginRequiredMixin, UpdateView):
+    model = Blog
+    fields = ('blog_title', 'blog_content', 'blog_image')
+    template_name = 'Blog_Management/edit_blog.html'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('Blog_Management_App:full_blog', kwargs={'slug':self.object.slug})
