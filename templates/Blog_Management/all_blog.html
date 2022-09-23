@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% block title_block %} Home {% endblock title_block %}
 {% block main_content %}
 
@@ -10,7 +11,7 @@
             <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
         </div>
         <div class="col-lg-7">
-            <p>{{ blog.blog_content }}</p>
+            <p>{{ blog.blog_content|range_filter|linebreaks }}</p>
             <h6 class="fw-bold">Posted by: <a href="#">@{{ blog.author }}</a></h6>
         </div>
     </div>
