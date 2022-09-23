@@ -1,14 +1,15 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Blog
+from .models import Blog, Like
 import uuid
 from django.urls import reverse
 from .forms import CommentForm
+from django.contrib.auth.decorators import login_required
 
 
-def blogs(request):
-    return render(request, 'Blog_Management/all_blog.html')
+# def blogs(request):
+#     return render(request, 'Blog_Management/all_blog.html')
 
 
 # write blog or create blog 
@@ -35,10 +36,17 @@ class AllBlog(ListView):
     template_name = 'Blog_Management/all_blog.html'
 
 
-# show full blog 
+# show full blog
+@login_required
 def full_blog(request, slug):
     blog = Blog.objects.get(slug=slug)
     comment_form = CommentForm()
+
+    already_liked = Like.objects.filter(blog=blog, user=request.user)
+    if already_liked:
+        liked = True
+    else:
+        liked = False
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -50,4 +58,30 @@ def full_blog(request, slug):
             comment.save()
             return HttpResponseRedirect(reverse('Blog_Management_App:full_blog', kwargs={'slug':slug}))
 
-    return render(request, 'Blog_Management/full_blog.html', {'blog': blog, 'comment_form': comment_form})
+    return render(request, 'Blog_Management/full_blog.html', {'blog': blog, 'comment_form': comment_form, 'liked': liked})
+
+
+# like 
+@login_required
+def liked(request, pk):
+    blog = Blog.objects.get(pk=pk)
+    user = request.user
+
+    already_liked = Like.objects.filter(blog=blog, user=user)
+    
+    if not already_liked:
+        liked_post = Like(blog=blog, user=user)
+        liked_post.save()
+
+    return HttpResponseRedirect(reverse('Blog_Management_App:full_blog', kwargs={'slug':blog.slug}))
+
+
+# unlike 
+@login_required
+def unliked(request, pk):
+    blog = Blog.objects.get(pk=pk)
+    user = request.user
+    already_liked = Like.objects.filter(blog=blog, user=user)
+    already_liked.delete()
+
+    return HttpResponseRedirect(reverse('Blog_Management_App:full_blog', kwargs={'slug':blog.slug}))
