@@ -4,16 +4,16 @@
 {% block main_content %}
 
 {% for blog in blogs %}
-    <h4>{{ blog.blog_title }}</h4>
-    <h6>{{ blog.publish_date }}</h6>
+    <h4 class="title-font">{{ blog.blog_title }}</h4>
+    <h6 class="time-font">{{ blog.publish_date }}</h6>
     <div class="row">
         <div class="col-lg-4">
             <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
         </div>
         <div class="col-lg-8">
-            <p>{{ blog.blog_content|range_filter }} <a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}">Read More</a></p>
-            <h6 class="fw-bold">Posted by: <a href="#">@{{ blog.author }}</a></h6>
-            <h6>{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</h6>
+            <p class="regular-font">{{ blog.blog_content|range_filter }} <a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none">Read More</a></p>
+            <h6 class="fw-bold time-font">Posted by: <a href="#">@{{ blog.author }}</a></h6>
+            <h6 class="time-font">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</h6>
         </div>
     </div>
     <hr>

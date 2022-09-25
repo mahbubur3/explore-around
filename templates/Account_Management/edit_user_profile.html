@@ -5,8 +5,8 @@
 
 <div class="row justify-content-center mt-3">
     <div class="col-lg-10">
-        <h3 class="text-center mt-3 fw-bold">Edit Your Profile</h3>
-        <form method="POST">
+        <h3 class="text-center mt-3 fw-bold title-font">Edit Your Profile</h3>
+        <form method="POST" class="time-font">
             {{ form|crispy }}
             {% csrf_token %}
             <div class="d-flex justify-content-center mt-4">

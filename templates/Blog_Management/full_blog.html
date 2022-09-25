@@ -9,13 +9,15 @@
             <img src="/media/{{ blog.blog_image }}" width="100%">
         </div>
         <div class="mt-2">
-            <h3>{{ blog.blog_title }}</h3>
-            <h6 class="font-italic">Posted by: @{{ blog.author }}</h6>
-            <h6>Published on: {{ blog.publish_date }}</h6>
-            <h6>Updated on: {{ blog.update_date }}</h6>
+            <h3 class="title-font">{{ blog.blog_title }}</h3>
+            <div class="time-font">
+                <h6>Posted by: @{{ blog.author }}</h6>
+                <h6>Published on: {{ blog.publish_date }}</h6>
+                <h6>Updated on: {{ blog.update_date }}</h6>
+            </div>
         </div>
         <hr>
-        <p>{{ blog.blog_content|linebreaks }}</p>
+        <p class="regular-font">{{ blog.blog_content|linebreaks }}</p>
         {% if not liked %}
             <a href="{% url 'Blog_Management_App:liked_post' pk=blog.pk %}"><i class="fa fa-solid fa-thumbs-up fa-2x"></i></a>
         {% else %}
@@ -25,7 +27,7 @@
 </div>
 <div class="row mb-4 mt-3">
     <div class="col-lg-6">
-        <h5>Comments:</h5>
+        <h5 class="time-font">Comments:</h5>
         {% for comment in blog.blog_comment.all %}
             <p><a href="#">@{{ comment.user }}</a> {{ comment.comment }} <br> {{ comment.comment_date }}</p>
         {% endfor %}
@@ -34,7 +36,9 @@
         <form method="POST">
             {{ comment_form|crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 </div>
