@@ -5,9 +5,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="mt-2">
-            <img src="/media/{{ blog.blog_image }}" width="100%">
-        </div>
+        <img src="/media/{{ blog.blog_image }}" width="100%">
         <div class="mt-2">
             <h3 class="title-font">{{ blog.blog_title }}</h3>
             <div class="time-font">
@@ -29,11 +27,13 @@
     <div class="col-lg-6">
         <h5 class="time-font">Comments:</h5>
         {% for comment in blog.blog_comment.all %}
-            <p><a href="#">@{{ comment.user }}</a> {{ comment.comment }} <br> {{ comment.comment_date }}</p>
+            <div class="time-font">
+                <p><a href="#">@{{ comment.user }}</a> {{ comment.comment }} <br> {{ comment.comment_date }}</p>
+            </div>
         {% endfor %}
     </div>
     <div class="col-lg-6">
-        <form method="POST">
+        <form method="POST" class="time-font">
             {{ comment_form|crispy }}
             {% csrf_token %}
             <div class="mt-3">

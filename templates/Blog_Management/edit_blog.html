@@ -4,7 +4,7 @@
 {% block main_content %}
 
 {% if blog.author == user %}
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" class="time-font">
         {{ form|crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-success mt-2">Update</button>
