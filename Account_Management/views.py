@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
+# sign up or create user account
 def signup(request):
     form = SignupForm()
     registered = False
