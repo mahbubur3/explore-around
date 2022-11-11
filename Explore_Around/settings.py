@@ -42,9 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'Account_Management',
     'Blog_Management',
+
     'crispy_forms',
+    
     'django_cleanup.apps.CleanupConfig',
 ]
 

@@ -1,15 +1,12 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Blog, Like
 import uuid
 from django.urls import reverse, reverse_lazy
-from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 
-
-# def blogs(request):
-#     return render(request, 'Blog_Management/all_blog.html')
+from .models import Blog, Like
+from .forms import CommentForm
 
 
 # write blog or create blog 

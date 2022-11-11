@@ -6,6 +6,8 @@ from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
+from .forms import SignupForm, EditUserProfileForm, ProfilePictureForm
+
 
 # sign up or create user account
 def signup(request):
