@@ -3,20 +3,40 @@
 {% block title_block %} Home {% endblock title_block %}
 {% block main_content %}
 
-{% for blog in blogs %}
-    <h4><a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none title-font">{{ blog.blog_title }}</a></h4>
-    <h6 class="time-font">{{ blog.publish_date }}</h6>
-    <div class="row">
-        <div class="col-lg-4">
-            <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
+<div class="row row-cols-1 row-cols-md-3 g-5">
+  {% for blog in blogs %}
+  <div class="col">
+    <div class="card h-100 border-0">
+      <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}">
+      <div class="mt-2">
+        <span class="time-font" style="color: #999;">{{ blog.publish_date }}</span>
+        <h5 class="card-title"><a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none title-font">{{ blog.blog_title }}</a></h5>
+        <p class="card-text" style="color: #999;">{{ blog.blog_content|range_filter }}</p>
+        <div>
+          <p class="time-font mt-1" style="color: #999;">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</p>
+          <strong><a href="" class="mt-1">posted by: {{ blog.author }}</a></strong>
         </div>
-        <div class="col-lg-8">
-            <p class="regular-font">{{ blog.blog_content|range_filter }}</p>
-            <h6 class="fw-bold time-font">Posted by: <a href="#">@{{ blog.author }}</a></h6>
-            <h6 class="time-font">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</h6>
-        </div>
+      </div>
     </div>
-    <hr>
-{% endfor %}
+  </div>
+  {% endfor %}
+</div>
+
+
+{% comment %} {% for blog in blogs %}
+<h4><a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none title-font">{{ blog.blog_title }}</a></h4>
+<h6 class="time-font">{{ blog.publish_date }}</h6>
+<div class="row">
+    <div class="col-lg-4">
+        <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
+    </div>
+    <div class="col-lg-8">
+        <p class="regular-font">{{ blog.blog_content|range_filter }}</p>
+        <h6 class="fw-bold time-font">Posted by: <a href="#">@{{ blog.author }}</a></h6>
+        <h6 class="time-font">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</h6>
+    </div>
+</div>
+<hr>
+{% endfor %} {% endcomment %}
 
 {% endblock main_content %}
