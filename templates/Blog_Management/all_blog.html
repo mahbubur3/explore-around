@@ -3,19 +3,44 @@
 {% block title_block %} Home {% endblock title_block %}
 {% block main_content %}
 
-<div class="row row-cols-1 row-cols-md-3 g-5">
+{% comment %} <div class="row row-cols-1 row-cols-md-3 g-5">
   {% for blog in blogs %}
   <div class="col">
     <div class="card h-100 border-0">
-      <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}">
+      <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" class=" rounded-3">
       <div class="mt-2">
         <span class="time-font" style="color: #999;">{{ blog.publish_date }}</span>
-        <h5 class="card-title"><a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none title-font">{{ blog.blog_title }}</a></h5>
+        <h5 class="card-title"><a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none title-font text-dark">{{ blog.blog_title }}</a></h5>
         <p class="card-text" style="color: #999;">{{ blog.blog_content|range_filter }}</p>
         <div>
           <p class="time-font mt-1" style="color: #999;">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</p>
-          <strong><a href="" class="mt-1">posted by: {{ blog.author }}</a></strong>
+          <strong><a href="" class="mt-1 time-font text-decoration-none text-dark">posted by: {{ blog.author }}</a></strong>
         </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div> {% endcomment %}
+
+
+<div class="row">
+  {% for blog in blogs %}
+  <div class="col-md-4">
+    <div class="card mb-4 border-0">
+      <div>
+        <span class="time-font" style="color: #999;">{{ blog.publish_date }}</span>
+        <a href="" class="text-decoration-none">
+          <h4 class="card-title title-font text-dark">{{ blog.blog_title }}</h4>
+        </a>
+      </div>
+      <div class="row">
+        <a href="">
+          <img src="/media/{{ blog.blog_image }}" alt="" class="card-img">
+        </a>
+      </div>
+      <div class="pt-2">
+        <p class="card-text time-font" style="color: #999;">{{ blog.blog_content|range_filter }}</p>
+        <p class="time-font mt-1" style="color: #999;">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</p>
       </div>
     </div>
   </div>
