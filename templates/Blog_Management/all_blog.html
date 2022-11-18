@@ -22,46 +22,50 @@
   {% endfor %}
 </div> {% endcomment %}
 
+{% comment %} blog section  {% endcomment %}
+<div class="container">
+  <div class="row">
+    {% for blog in blogs %}
+    <div class="col-md-4" data-aos="fade-up">
+      <div class="card mb-4 border-0">
+        <div>
+          <span class="time-font" style="color: #999;">{{ blog.publish_date }}</span>
+          <a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none">
+            <h4 class="card-title title-font text-dark">{{ blog.blog_title }}</h4>
+          </a>
+        </div>
+        <div class="row">
+          <a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}">
+            <img src="/media/{{ blog.blog_image }}" alt="" class="card-img">
+          </a>
+        </div>
+        <div class="pt-2">
+          <p class="card-text time-font" style="color: #999;">{{ blog.blog_content|range_filter }}</p>
+          <p class="time-font mt-1" style="color: #999;">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
-<div class="row">
-  {% for blog in blogs %}
-  <div class="col-md-4">
-    <div class="card mb-4 border-0">
-      <div>
-        <span class="time-font" style="color: #999;">{{ blog.publish_date }}</span>
-        <a href="" class="text-decoration-none">
-          <h4 class="card-title title-font text-dark">{{ blog.blog_title }}</h4>
-        </a>
-      </div>
-      <div class="row">
-        <a href="">
-          <img src="/media/{{ blog.blog_image }}" alt="" class="card-img">
-        </a>
-      </div>
-      <div class="pt-2">
-        <p class="card-text time-font" style="color: #999;">{{ blog.blog_content|range_filter }}</p>
-        <p class="time-font mt-1" style="color: #999;">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</p>
+
+{% comment %} newsletter section  {% endcomment %}
+<div style="background-color: #e0e0e0;" data-aos="fade-up">
+  <div class="text-center py-5">
+    <h3 class="title-font">Subcribe to our newsletter</h3>
+    <p class="time-font" style="color: #818181;">Join our monthly newsletter and never miss out on new stories and promotions.</p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ms-auto me-auto">
+        <div class="input-group mb-3 mt-3 time-font">
+          <input type="text" class="form-control" placeholder="Email address">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-secondary">Subscribe</button>
+          </span>
+        </div>
       </div>
     </div>
   </div>
-  {% endfor %}
 </div>
-
-
-{% comment %} {% for blog in blogs %}
-<h4><a href="{% url 'Blog_Management_App:full_blog' slug=blog.slug %}" class="text-decoration-none title-font">{{ blog.blog_title }}</a></h4>
-<h6 class="time-font">{{ blog.publish_date }}</h6>
-<div class="row">
-    <div class="col-lg-4">
-        <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" width="100%">
-    </div>
-    <div class="col-lg-8">
-        <p class="regular-font">{{ blog.blog_content|range_filter }}</p>
-        <h6 class="fw-bold time-font">Posted by: <a href="#">@{{ blog.author }}</a></h6>
-        <h6 class="time-font">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</h6>
-    </div>
-</div>
-<hr>
-{% endfor %} {% endcomment %}
 
 {% endblock main_content %}

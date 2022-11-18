@@ -3,7 +3,7 @@
 {% block title_block %} {{ blog.blog_title }} {% endblock title_block %}
 {% block main_content %}
 
-<div class="row">
+{% comment %} <div class="row">
     <div class="col-lg-12">
         <img src="/media/{{ blog.blog_image }}" width="100%">
         <div class="mt-2">
@@ -22,8 +22,51 @@
             <a href="{% url 'Blog_Management_App:unliked_post' pk=blog.pk %}"><i class="fa fa-solid fa-thumbs-down fa-2x"></i></a>
         {% endif %}
     </div>
+</div> {% endcomment %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center">
+                <h3 class="title-font">{{ blog.blog_title }}</h3>
+                <div class="time-font">
+                    <h6>Posted by: @{{ blog.author }}</h6>
+                    <h6>Published on: {{ blog.publish_date }}</h6>
+                </div>
+            </div>
+            <img src="/media/{{ blog.blog_image }}" width="100%">
+            <p class="time-font">{{ blog.blog_content|linebreaks }}</p>
+            {% if not liked %}
+                <a href="{% url 'Blog_Management_App:liked_post' pk=blog.pk %}"><i class="fa fa-solid fa-thumbs-up fa-2x"></i></a>
+            {% else %}
+                <a href="{% url 'Blog_Management_App:unliked_post' pk=blog.pk %}"><i class="fa fa-solid fa-thumbs-down fa-2x"></i></a>
+            {% endif %}
+        </div>
+    </div>
 </div>
-<div class="row mb-4 mt-3">
+
+<div class="container">
+    <div class="row justify-content-center my-2">
+        <div class="col-lg-8">
+            <h5 class="time-font fw-bold">Comments:</h5>
+            {% for comment in blog.blog_comment.all %}
+                <div class="time-font">
+                    <p><a href="#">@{{ comment.user }}</a> {{ comment.comment }} <br> {{ comment.comment_date }}</p>
+                </div>
+            {% endfor %}
+            <div class="col-lg-6">
+                <form method="POST" class="time-font">
+                    {{ comment_form|crispy }}
+                    {% csrf_token %}
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+{% comment %} <div class="row mb-4 mt-3">
     <div class="col-lg-6">
         <h5 class="time-font">Comments:</h5>
         {% for comment in blog.blog_comment.all %}
@@ -41,6 +84,6 @@
             </div>
         </form>
     </div>
-</div>
+</div>  {% endcomment %}
 
 {% endblock main_content %}

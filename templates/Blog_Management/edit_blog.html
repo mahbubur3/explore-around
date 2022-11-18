@@ -3,15 +3,17 @@
 {% block title_block %} {{ blog.blog_title }} {% endblock title_block %}
 {% block main_content %}
 
-{% if blog.author == user %}
-    <form method="POST" enctype="multipart/form-data" class="time-font">
+<div class="container">
+    {% if blog.author == user %}
+        <form method="POST" enctype="multipart/form-data" class="time-font">
         {{ form|crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-success mt-2">Update</button>
-{% else %}
-    <p>You are not allowed to view this page!</p>
-    </form>
-{% endif %}
+    {% else %}
+        <p>You are not allowed to view this page!</p>
+        </form>
+    {% endif %}
+</div>
 
 {% endblock main_content %}
     
