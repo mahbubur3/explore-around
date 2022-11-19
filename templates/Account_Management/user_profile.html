@@ -2,20 +2,20 @@
 {% block title_block %} Profile {% endblock title_block %}
 {% block main_content %}
 
-<div>
+<div class="container">
     <h2 class="title-font">Your Profile</h2>
     <hr>
     <div class="mb-2 time-font">
         {% if user.user_profile %}
-            <img src="/media/{{ user.user_profile.profile_picture }}" alt="Profile picture" class="rounded-circle" width="100px">
-            <div class="mt-3">
-                <a href="{% url 'Account_Management_App:change_profile_picture' %}">Change profile picture</a>
-            </div>
+        <img src="/media/{{ user.user_profile.profile_picture }}" alt="Profile picture" class="rounded-circle" width="100px">
+        <div class="mt-3">
+            <a href="{% url 'Account_Management_App:change_profile_picture' %}">Change profile picture</a>
+        </div>
         {% else %}
-            <img src="/media/profile_pics/demo.png" alt="avater" class="rounded-circle" width="100px">
-            <div class="mt-2">
-                <a href="{% url 'Account_Management_App:add_profile_picture' %}" class="text-decoration-none">Add profile picture</a>
-            </div>
+        <img src="/media/profile_pics/demo.png" alt="avater" class="rounded-circle" width="100px">
+        <div class="mt-2">
+            <a href="{% url 'Account_Management_App:add_profile_picture' %}" class="text-decoration-none">Add profile picture</a>
+        </div>
         {% endif %}
     </div>
     <div class="time-font">

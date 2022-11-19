@@ -3,7 +3,8 @@
 {% block title_block %} SignUp {% endblock title_block %}
 {% block main_content %}
 
-{% if registered %}
+<div class="container">
+    {% if registered %}
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="alert alert-success">Account created successfully. Please <a href="{% url 'Account_Management_App:signin' %}">SignIn</a>
@@ -11,7 +12,7 @@
             </div>
         </div>
     </div>
-{% else %}
+    {% else %}
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <h3 class="text-center mt-4 fw-bold title-font">Create a new account</h3>
@@ -28,7 +29,8 @@
             </div>
         </div>
     </div>
-{% endif %}
+    {% endif %}
+</div>
 
 {% endblock main_content %}
     

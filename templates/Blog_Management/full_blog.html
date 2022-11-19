@@ -24,18 +24,18 @@
     </div>
 </div> {% endcomment %}
 
-<div class="container">
+<div class="container time-font">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="text-center">
                 <h3 class="title-font">{{ blog.blog_title }}</h3>
-                <div class="time-font">
+                <div>
                     <h6>Posted by: @{{ blog.author }}</h6>
                     <h6>Published on: {{ blog.publish_date }}</h6>
                 </div>
             </div>
             <img src="/media/{{ blog.blog_image }}" width="100%">
-            <p class="time-font">{{ blog.blog_content|linebreaks }}</p>
+            <p>{{ blog.blog_content|linebreaks }}</p>
             {% if not liked %}
                 <a href="{% url 'Blog_Management_App:liked_post' pk=blog.pk %}"><i class="fa fa-solid fa-thumbs-up fa-2x"></i></a>
             {% else %}
@@ -65,6 +65,24 @@
             </div>
         </div>
     </div> 
+</div>
+
+{% comment %} newsletter section  {% endcomment %}
+<div style="background-color: #e0e0e0;" data-aos="fade-up">
+    <div class="text-center py-5">
+        <h3 class="title-font">Subcribe to our newsletter</h3>
+        <p class="time-font" style="color: #818181;">Join our monthly newsletter and never miss out on new stories and promotions.</p>
+        <div class="row">
+            <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ms-auto me-auto">
+                <div class="input-group mb-3 mt-3 time-font">
+                    <input type="text" class="form-control" placeholder="Email address">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-secondary">Subscribe</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% comment %} <div class="row mb-4 mt-3">
     <div class="col-lg-6">
